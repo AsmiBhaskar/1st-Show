@@ -24,7 +24,7 @@ def book_Seats(request, theater_id):
         selected_Seats = request.POST.getlist('seats')
         error_seats = []
         if not selected_Seats:
-            return render(request, "movies/seat_selection.html", {'theater': theaters, 'seats': seats, 'error': 'Please select at least one seat.'})
+            return render(request, "movies/seat_selection.html", {'theater': theaters, 'seats': seats, 'error': 'Please select at least one seat.', 'current_price': theaters.dynamic_price()})
         for seat_id in selected_Seats:
             seat=get_object_or_404(Seat, id=seat_id, theater=theaters)
             if seat.is_booked:
@@ -43,6 +43,19 @@ def book_Seats(request, theater_id):
                 error_seats.append(seat.seat_number)
         if error_seats: 
             error_message = f"The following seats are already booked:{', '.join(error_seats)}"
-            return render(request, "movies/seat_selection.html", {'theater': theaters, 'seats': seats, 'error': "no seat selected"})
+            return render(request, "movies/seat_selection.html", {'theater': theaters, 'seats': seats, 'error': "no seat selected", 'current_price': theaters.dynamic_price()})
         return redirect('users:profile')
-    return render(request, 'movies/seat_selection.html',{'theater': theaters, 'seats': seats})
+    return render(request, 'movies/seat_selection.html',{'theater': theaters, 'seats': seats, 'current_price': theaters.dynamic_price()})
+
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    return render(request, 'movies/movie_detail.html', {'movie': movie})
+
+def show_timetable(request):
+    from .models import Theater
+    shows = Theater.objects.select_related('movie').all().order_by('time')
+    # Precompute available and total seats for template
+    for show in shows:
+        show.available_seats = show.seats.filter(is_booked=False).count()
+        show.total_seats = show.seats.count()
+    return render(request, 'movies/show_timetable.html', {'shows': shows})

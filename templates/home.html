@@ -121,7 +121,10 @@
     </div>
     {% endif %}
   
-    <div class="section-title">Recommended Movies</div>
+    <div class="section-title d-flex justify-content-between align-items-center">
+      <span>Recommended Movies</span>
+      <a href="{% url 'movies:show_timetable' %}" class="btn btn-outline-info btn-sm">View All Show Timings</a>
+    </div>
     <div class="row">
         {% if movies %}
       {% for movie in movies|slice:":4" %}
