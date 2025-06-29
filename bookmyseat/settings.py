@@ -87,7 +87,7 @@ DATABASES = {
     }
 }
 
-DATABASES ['default'] = dj_database_url.parse('postgresql://django_bookmyseat_bf4u_user:Xi0xkP6GGQTokZbtXxSDY2YGVUYL0D8N@dpg-d1e035ripnbc73dpeel0-a.oregon-postgres.render.com/django_bookmyseat_bf4u')
+DATABASES ['default'] = dj_database_url.parse('postgresql://bookmyseat_zfci_user:gUV4Moe0W1UQwUFkDARTcE4PofF6VIs1@dpg-d1gi1efgi27c73bpd4hg-a.oregon-postgres.render.com/bookmyseat_zfci')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
