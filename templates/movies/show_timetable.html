@@ -1,0 +1,35 @@
+{% extends "users/basic.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <h2 class="mb-4">All Show Timings</h2>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Movie</th>
+                <th>Theater</th>
+                <th>Show Time</th>
+                <th>Current Price (₹)</th>
+                <th>Available Seats</th>
+                <th>Book</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for show in shows %}
+            <tr>
+                <td>{{ show.movie.name }}</td>
+                <td>{{ show.name }}</td>
+                <td>{{ show.time|date:'D, M d, Y H:i' }}</td>
+                <td>{{ show.dynamic_price }}</td>
+                <td>{{ show.available_seats }} / {{ show.total_seats }}</td>
+                <td>
+                    <a href="{% url 'movies:book_seats' show.id %}" class="btn btn-sm btn-success">Book</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="6" class="text-center">No shows available.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

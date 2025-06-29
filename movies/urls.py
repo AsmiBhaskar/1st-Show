@@ -5,7 +5,9 @@ from . import views
 app_name = 'movies'
 
 urlpatterns=[
-    path('',views.movie_list,name='movie_list'),
-    path('<int:movie_id>/theaters',views.theater_list,name='theater_list'),
-    path('theater/<int:theater_id>/seats/book/',views.book_Seats,name='book_seats'),
+    path('', views.movie_list, name='movie_list'),
+    path('<int:movie_id>/', views.movie_detail, name='movie_detail'),
+    path('timetable/', views.show_timetable, name='show_timetable'),
+    path('<int:movie_id>/theaters', views.theater_list, name='theater_list'),
+    path('theater/<int:theater_id>/seats/book/', views.book_Seats, name='book_seats'),
 ]

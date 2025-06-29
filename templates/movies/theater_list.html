@@ -158,6 +158,8 @@
         <div class="show-times">
           <div class="time-box">
             {{ theater.time }}
+            <br>
+            <span class="badge bg-info text-dark">Price: ₹{{ theater.dynamic_price }}</span>
             <a href="{% url 'movies:book_seats' theater.id %}">
               <span>Book Now</span>
             </a>

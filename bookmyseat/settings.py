@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-_jbr)2=2!4t!rk8eps8^c9a-@!pe8or9=)mm0%+#tl-3rwcp#)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app']
 
 
 # Application definition
@@ -57,7 +58,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ROOT_URLCONF = 'bookmyseat.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -87,6 +87,7 @@ DATABASES = {
     }
 }
 
+DATABASES ['default'] = dj_database_url.parse('postgresql://django_bookmyseat_bf4u_user:Xi0xkP6GGQTokZbtXxSDY2YGVUYL0D8N@dpg-d1e035ripnbc73dpeel0-a.oregon-postgres.render.com/django_bookmyseat_bf4u')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
